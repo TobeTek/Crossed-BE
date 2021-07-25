@@ -1,15 +1,23 @@
 from django.db import models
-# from accounts.models import Driver
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 
 class Supplies(models.Model):
 	name = models.CharField(max_length=200, unique=True)
-	desription = models.CharField(max_length=200, blank=True)
+	description = models.CharField(max_length=200, blank=True)
 	application_method = models.TextField(blank=True)
+
+	def __str__(self):
+		return self.name
+	class Meta:
+		verbose_name_plural = 'Supplies'
 
 class TransportType(models.Model):
 	name = models.CharField(max_length=200, unique=True)
+
+	def __str__(self):
+		return self.name
 
 class Transport(models.Model):
 	RATING_CHOICES = (
@@ -20,12 +28,13 @@ class Transport(models.Model):
 		(4,'4 Stars'),
 		(5,'5 Stars'),
 		)
-	# driver = models.OneToOneField(Driver, on_delete=models.CASCADE, related_name='transport')
-	supplies = models.ManyToManyField(Supplies, related_name='transports',null=True)
+	driver = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='transports')
+	supplies = models.ManyToManyField(Supplies, related_name='transports')
 	rating = models.PositiveIntegerField(choices=RATING_CHOICES, default=0)
 	transport_type = models.ForeignKey(TransportType, on_delete=models.CASCADE, related_name='transports')
 
-
+	def __str__(self):
+		return "{} Driver: {} {}".format(self.transport_type, self.driver.first_name, self.driver.last_name)
 
 
 
