@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-# Create your models here.
+
 
 class Supplies(models.Model):
 	name = models.CharField(max_length=200, unique=True)
@@ -13,11 +13,13 @@ class Supplies(models.Model):
 	class Meta:
 		verbose_name_plural = 'Supplies'
 
+
 class TransportType(models.Model):
 	name = models.CharField(max_length=200, unique=True)
 
 	def __str__(self):
 		return self.name
+
 
 class Transport(models.Model):
 	RATING_CHOICES = (
