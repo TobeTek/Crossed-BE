@@ -5,7 +5,7 @@ from .models import CustomUser
 
 
 class CustomUserAdmin(UserAdmin):
-	fieldsets= ((None,{'fields':('username', 'email', 'first_name', 'last_name','user_type')}),
+	fieldsets= ((None,{'fields':('username', 'email', 'first_name', 'last_name','user_type','profile_picture','thumbnail_picture')}),
 				('Permissions',{'fields':("is_staff",'is_active',)}),	
 		)
 

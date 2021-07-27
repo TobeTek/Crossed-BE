@@ -30,10 +30,13 @@ class Transport(models.Model):
 		(4,'4 Stars'),
 		(5,'5 Stars'),
 		)
-	driver = models.OneToOneField(User, on_delete=models.CASCADE, related_name='transports')
-	supplies = models.ManyToManyField(Supplies, related_name='transports')
+
+	driver = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='transports')
+	supplies = models.ManyToManyField(Supplies, related_name='transports', blank=True)
+
 	rating = models.PositiveIntegerField(choices=RATING_CHOICES, default=0)
 	transport_type = models.ForeignKey(TransportType, on_delete=models.CASCADE, related_name='transports')
+	license_number = models.CharField(max_length=30)
 
 	def __str__(self):
 		return "{} Driver: {} {}".format(self.transport_type, self.driver.first_name, self.driver.last_name)
