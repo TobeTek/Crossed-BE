@@ -1,0 +1,22 @@
+{% extends './base.html' %}
+{% block title %}Transport List{% endblock title %}
+
+{% block content %}
+<h2>List of all Vehicles and Transports</h2>
+<a href='#'><button>+ Add Vehicle/Transport</button></a>
+<table >
+{% for object in object_list %}
+<tr>
+	<th>name</th>
+	<th>description</th>
+	<th>application_method</th>
+<tr>
+	<td>{{object.name}}</td>
+	
+	<td>{{object.description}}</td>
+	<td>{{object.application_method}}</td>
+	
+</tr>
+{% endfor %}
+</table>
+{% endblock content %}

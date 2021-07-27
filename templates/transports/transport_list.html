@@ -1,0 +1,28 @@
+{% extends './base.html' %}
+{% block title %}Transport List{% endblock title %}
+
+{% block content %}
+<h2>List of all Vehicles and Transports</h2>
+<a href='#'><button>+ Add Vehicle/Transport</button></a>
+<table >
+{% for object in object_list %}
+<tr>
+	<th>Driver</th>
+	<th>Supplies</th>
+	<th>Rating</th>
+	<th>Transport Type</th>
+	<th>License Number</th>
+<tr>
+	<td>{{object.driver}}</td>
+	
+	<td>{% for supply in object.supplies.all %}
+		<span><em>{{supply}}<em></span></td>
+		{% endfor %}
+	
+	<td>{{object.rating}}</td>
+	<td>{{object.transport_type}}</td>
+	<td>{{object.license_number}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock content %}
