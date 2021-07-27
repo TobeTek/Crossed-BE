@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-
+User = get_user_model()
 
 class Supplies(models.Model):
 	name = models.CharField(max_length=200, unique=True)
@@ -30,8 +30,10 @@ class Transport(models.Model):
 		(4,'4 Stars'),
 		(5,'5 Stars'),
 		)
+
 	driver = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='transports')
 	supplies = models.ManyToManyField(Supplies, related_name='transports', blank=True)
+
 	rating = models.PositiveIntegerField(choices=RATING_CHOICES, default=0)
 	transport_type = models.ForeignKey(TransportType, on_delete=models.CASCADE, related_name='transports')
 	license_number = models.CharField(max_length=30)
